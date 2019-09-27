@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>João Guilherme</title>
+
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+
+    <style>
+
+        html, body {
+            overflow: hidden;
+            margin: 0;
+        }
+
+        body {
+            font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-size: calc(10px + 0.33vw);
+            -webkit-font-smoothing: antialiased;
+            padding: 5vh 10vw;
+            color: #121314;
+        }
+
+        #wrapper {
+            position: absolute;
+            left: 0;
+            width: 320px;
+            text-align: center;
+            top: 50%;
+            left: 50%;
+            margin-left: -160px;
+            margin-top: -160px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        h1 {
+            font-size: 4.5em;
+            font-weight: 500;
+            margin-bottom: 0;
+        }
+
+        h2 {
+            color: #999;
+            font-weight: normal;
+            font-size: 15px;
+            letter-spacing: .12em;
+            margin-bottom: 30px;
+            left: 3px;
+        }
+
+        h1, h2 {
+            position: relative;
+        }
+
+        p {
+            font-size: 1.6em;
+            font-weight: 300;
+            line-height: 1.4;
+            max-width: 26em;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: #121314;
+            position: relative;
+        }
+
+        a:after {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            top: 60%;
+            left: -0.1em;
+            right: -0.1em;
+            bottom: 0;
+            /*transition: top 200ms cubic-bezier(0, .8, .13, 1);*/
+            /*background-color: rgba(79, 192, 141, 0.5);*/
+        }
+
+        a:hover:after {
+            top: 0%;
+        }
+
+    </style>
+    <script type="text/javascript" async="" src="http://www.google-analytics.com/ga.js"></script>
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-100433425-1']);
+        _gaq.push(['_setDomainName', 'jguilherme.surge.sh']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+</head>
+<body>
+<h1 id="hello" style="position: absolute">Hello.</h1>
+
+<div style="padding-top: 160px">
+    <p style="font-weight:300; font-size:2.0em">
+        My name is João Guilherme
+    </p>
+    <p style="font-weight:300; font-size:2.0em">
+        My email is joaaogui@gmail.com
+    </p>
+    <p style="font-weight:300; font-size:2.0em">
+        I'm a software engineer
+    </p>
+    <p>
+        <a href="https://www.linkedin.com/in/joaaogui/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+        &nbsp;
+        <a href="https://github.com/joaaogui" target="_blank">    <i class="fab fa-github"></i></a>
+    </p>
+
+</div>&nbsp;
+
+<!--        <div id="wrapper">-->
+<!--            <h1>João Guilherme</h1>-->
+<!--            <h2>Engenharia De Software @ Universidade De Brasília&nbsp;</h2>-->
+<!--                        <h2>joaaogui@gmail.com</h2>-->
+<!--            <p><a href="https://github.com/joaaogui" target="_blank">Github</a></p>-->
+<!--            <p><a href="https://www.behance.net/jguilherme" target="_blank">Behance</a></p>-->
+<!--            <p><a href="https://www.linkedin.com/in/jo%C3%A3o-guilherme-silva-a63ba2113/" target="_blank">LinkedIn</a></p>-->
+
+
+<!--        </div>-->
+<canvas width="1645" height="938"></canvas>
+<script>
+
+    var text = ["Hello", "Oi", "Hola" ,"Bonjour", "こんにちは", "Hallo","你好" ,"Ciao", "Aloha", "Γεια σου", "नमस्ते"];
+    var counter = 0;
+    var elem = document.getElementById("hello");
+    var inst = setInterval(change, 1000);
+
+    function change() {
+        elem.innerHTML = text[counter];
+        counter++;
+        if (counter >= text.length) {
+            counter = 0;
+            // clearInterval(inst); // uncomment this if you want to stop refreshing after one cycle
+        }
+    }
+
+    document.addEventListener('touchmove', function (e) {
+        e.preventDefault()
+    })
+    var c = document.getElementsByTagName('canvas')[0],
+        x = c.getContext('2d'),
+        pr = window.devicePixelRatio || 1,
+        w = window.innerWidth,
+        h = window.innerHeight,
+        f = 10,
+        q,
+        m = Math,
+        r = 0,
+        u = m.PI * 2,
+        v = m.cos,
+        z = m.random
+    c.width = w * pr
+    c.height = h * pr
+    x.scale(pr, pr)
+    x.globalAlpha = 0.6
+
+    function i() {
+        x.clearRect(0, 0, w, h)
+        q = [{x: 0, y: h * .7 + f}, {x: 0, y: h * .7 - f}]
+        while (q[1].x < w + f) d(q[0], q[1])
+    }
+
+    function d(i, j) {
+        x.beginPath()
+        x.moveTo(i.x, i.y)
+        x.lineTo(j.x, j.y)
+        var k = j.x + (z() * 2 - 0.25) * f,
+            n = y(j.y)
+        x.lineTo(k, n)
+        x.closePath()
+        r -= u / -50
+        x.fillStyle = '#' + (v(r) * 127 + 128 << 16 | v(r + u / 3) * 127 + 128 << 8 | v(r + u / 3 * 2) * 127 + 128).toString(16)
+        x.fill()
+        q[0] = q[1]
+        q[1] = {x: k, y: n}
+    }
+
+    function y(p) {
+        var t = p + (z() * 2 - 1.1) * f
+        return (t > h || t < 0) ? y(p) : t
+    }
+
+    document.onclick = i
+    document.ontouchstart = i
+    i()
+</script>
+
+
+</body>
+</html>
