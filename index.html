@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>João Guilherme</title>
@@ -8,110 +7,31 @@
     <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
-    <link rel="manifest" href="favicon/site.webmanifest">
     <link rel="stylesheet" href="index.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"
 </head>
 
 <body>
-<h1 id="hello" style="position: absolute">Hello.</h1>
+<h1 class="greetingText">Hello</h1>
 
-<div style="padding-top: 160px">
-    <p style="font-weight:300; font-size:2.0em">
+<div class="main">
+    <p>
         My name is João Guilherme
     </p>
-    <p style="font-weight:300; font-size:2.0em">
-        My email is joaaogui@gmail.com
+    <p>
+        My email is me@joaoguilherme.me
     </p>
-    <p style="font-weight:300; font-size:2.0em">
+    <p>
         I'm a software engineer
     </p>
     <p>
         <a href="https://www.linkedin.com/in/joaaogui/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-        &nbsp;
-        <a href="https://github.com/joaaogui" target="_blank">    <i class="fab fa-github"></i></a>
+        <a href="https://github.com/joaaogui" target="_blank"> <i class="fab fa-github"></i></a>
     </p>
 
-</div>&nbsp;
-
-<!--        <div id="wrapper">-->
-<!--            <h1>João Guilherme</h1>-->
-<!--            <h2>Engenharia De Software @ Universidade De Brasília&nbsp;</h2>-->
-<!--                        <h2>joaaogui@gmail.com</h2>-->
-<!--            <p><a href="https://github.com/joaaogui" target="_blank">Github</a></p>-->
-<!--            <p><a href="https://www.behance.net/jguilherme" target="_blank">Behance</a></p>-->
-<!--            <p><a href="https://www.linkedin.com/in/jo%C3%A3o-guilherme-silva-a63ba2113/" target="_blank">LinkedIn</a></p>-->
-
-
-<!--        </div>-->
-<canvas width="1645" height="938"></canvas>
-<script>
-
-    var text = ["Hello", "Oi", "Hola" ,"Bonjour", "こんにちは", "Hallo","你好" ,"Ciao", "Aloha", "Γεια σου", "नमस्ते"];
-    var counter = 0;
-    var elem = document.getElementById("hello");
-    var inst = setInterval(change, 1000);
-
-    function change() {
-        elem.innerHTML = text[counter];
-        counter++;
-        if (counter >= text.length) {
-            counter = 0;
-            // clearInterval(inst); // uncomment this if you want to stop refreshing after one cycle
-        }
-    }
-
-    document.addEventListener('touchmove', function (e) {
-        e.preventDefault()
-    })
-    var c = document.getElementsByTagName('canvas')[0],
-        x = c.getContext('2d'),
-        pr = window.devicePixelRatio || 1,
-        w = window.innerWidth,
-        h = window.innerHeight,
-        f = 10,
-        q,
-        m = Math,
-        r = 0,
-        u = m.PI * 2,
-        v = m.cos,
-        z = m.random
-    c.width = w * pr
-    c.height = h * pr
-    x.scale(pr, pr)
-    x.globalAlpha = 0.6
-
-    function i() {
-        x.clearRect(0, 0, w, h)
-        q = [{x: 0, y: h * .7 + f}, {x: 0, y: h * .7 - f}]
-        while (q[1].x < w + f) d(q[0], q[1])
-    }
-
-    function d(i, j) {
-        x.beginPath()
-        x.moveTo(i.x, i.y)
-        x.lineTo(j.x, j.y)
-        var k = j.x + (z() * 2 - 0.25) * f,
-            n = y(j.y)
-        x.lineTo(k, n)
-        x.closePath()
-        r -= u / -50
-        x.fillStyle = '#' + (v(r) * 127 + 128 << 16 | v(r + u / 3) * 127 + 128 << 8 | v(r + u / 3 * 2) * 127 + 128).toString(16)
-        x.fill()
-        q[0] = q[1]
-        q[1] = {x: k, y: n}
-    }
-
-    function y(p) {
-        var t = p + (z() * 2 - 1.1) * f
-        return (t > h || t < 0) ? y(p) : t
-    }
-
-    document.onclick = i
-    document.ontouchstart = i
-    i()
-</script>
-
-
+</div>
+<canvas></canvas>
+<script type="text/javascript" src="index.js"></script>
 </body>
 </html>
