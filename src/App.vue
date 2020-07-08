@@ -1,36 +1,49 @@
 <template>
   <v-app id="app">
     <v-main>
-      <v-container fluid>
-        <h1 class="greeting mb-10">{{greeting}}</h1>
-        <div class="main">
-          <p>
-            My name is João Guilherme
-          </p>
-          <p>
-            My email is me@joaoguilherme.me
-          </p>
-          <p>
-            I'm a software engineer
-          </p>
-          <p class="icons mt-10">
+      <v-container fluid fill-height>
+        <v-row class="greeting" align="start" no-gutters>
+          <v-col>
+            <h1>{{greeting}}</h1>
+          </v-col>
+        </v-row>
+        <v-row class="main" align="center">
+          <v-col cols="12">
+            <p>
+              My name is João Guilherme
+            </p>
+          </v-col>
+          <v-col cols="12">
+            <p>
+              My email is me@joaoguilherme.me
+            </p>
+          </v-col>
+          <v-col cols="12">
+            <p>
+              I'm a software engineer
+            </p>
+          </v-col>
+        </v-row>
+
+        <v-row class="icons" align="end">
+          <v-col cols="6" style="text-align: end;">
             <v-hover v-slot:default="{ hover }">
               <v-icon size="80" class="mr-2" :color="hover ? 'blue' : 'black' "
                       @click="goTo('https://www.linkedin.com/in/joaaogui/')">mdi-linkedin
               </v-icon>
             </v-hover>
+          </v-col>
+          <v-col cols="6" style="text-align: start;">
             <v-hover v-slot:default="{ hover }">
               <v-icon size="80" :color="hover ? 'blue' : 'black' " @click="goTo('https://github.com/joaaogui/')">
                 mdi-github
               </v-icon>
             </v-hover>
-
-          </p>
-
-        </div>
+          </v-col>
+        </v-row>
+        <canvas class="canvas" @click="i()"></canvas>
       </v-container>
     </v-main>
-    <canvas class="canvas" @click="i()"></canvas>
   </v-app>
 </template>
 
@@ -42,7 +55,6 @@
       this.c = document.getElementsByTagName('canvas')[0]
       this.x = this.c.getContext('2d')
       this.pr = window.devicePixelRatio || 1
-      console.log(this.pr)
       this.w = window.innerWidth
       this.h = window.innerHeight
       this.f = 60
@@ -77,12 +89,13 @@
       startInterval() {
         setInterval(() => {
           this.greeting = this.greetingsList[this.counter]
+          this.i()
           if (this.counter === this.greetingsList.length - 1) {
             this.counter = 0
           } else {
             this.counter += 1
           }
-        }, 1000);
+        }, 3000);
       },
       goTo(url) {
         window.location.href = url
@@ -124,20 +137,29 @@
     z-index: 0;
     width: 100%;
     height: 100%;
+    overflow: hidden;
     pointer-events: none;
+  }
+
+  .greeting {
+    text-align: center;
+    height: 25vh;
   }
 
   #app {
     font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
-    padding: 5vh 10vw;
     color: #121314;
-    overflow: auto;
+    text-align: center;
+    overflow: hidden;
     margin: 0;
   }
 
   .main {
+    overflow: hidden;
     z-index: 1;
+    text-align: center;
+    height: 50vh;
   }
 
   p {
@@ -148,11 +170,10 @@
   h1 {
     font-size: 4.5em;
     font-weight: 500;
-    margin-bottom: 0;
   }
 
   .icons {
-    z-index: 12;
+    height: 25vh;
   }
 
 </style>
