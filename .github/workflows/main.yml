@@ -1,40 +1,33 @@
-name: Build and Deploy
+name: Build and Deploy Package
+
 on:
+  workflow_dispatch:
   push:
-    branches:
-      - master
+    branches: ["master"]
+  release:
+    types:
+      - created
+
+env:
+  NODE_VERSION: 14
 
 jobs:
   build:
-    name: Build
+    name: "🚀Build and Publish"
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@master
-      - name: Install Dependencies
-        run: npm install
-      - name: Build
-        run: npm run build
-      - name: Archive Production Artifact
-        uses: actions/upload-artifact@master
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v1
         with:
-          name: dist
-          path: dist
-  deploy:
-    name: Deploy
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@master
-      - name: Download Artifact
-        uses: actions/download-artifact@master
+          node-version: ${{ env.NODE_VERSION }}
+      - uses: borales/actions-yarn@v3.0.0
+      - run: sudo yarn install
+      - run: sudo yarn tailwind
+      - run: sudo yarn build
+      - name: Publish generated content to GitHub Pages
+        uses: tsunematsu21/actions-publish-gh-pages@v1.0.2
         with:
-          name: dist
-          path: dist
-      - name: Deploy to Firebase
-        uses: w9jds/firebase-action@master
-        with:
-          args: deploy --only hosting
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASEDEPLOY }}
+          dir: dist
+          branch: gh-pages
+          token: ${{ secrets.token }}
