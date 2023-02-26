@@ -23,7 +23,6 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
       - uses: borales/actions-yarn@v3.0.0
       - run: sudo yarn install
-      - run: sudo yarn tailwind
       - run: sudo yarn build
       - name: Publish generated content to GitHub Pages
         uses: tsunematsu21/actions-publish-gh-pages@v1.0.2
